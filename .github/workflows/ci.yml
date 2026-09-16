@@ -1,0 +1,34 @@
+name: .NET CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Descargar el código del repositorio
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Configurar .NET SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      # Restaurar dependencias
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Compilar la aplicación
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      # Ejecutar pruebas
+      - name: Test
+        run: dotnet test --no-build --configuration Release
