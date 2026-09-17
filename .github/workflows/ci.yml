@@ -23,9 +23,7 @@ jobs:
 
       - name: Load env file
         run: |
-          set -a
-          source .env
-          set +a
+          cat .env >> "$GITHUB_ENV"
 
       - name: Print env file
         run: echo "APP ENV is for $APP_ENV"
