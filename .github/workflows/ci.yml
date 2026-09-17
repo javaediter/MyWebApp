@@ -21,6 +21,15 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
+      - name: Load env file
+        run: |
+          set -a
+          source .env
+          set +a
+
+      - name: Print env file
+        run: echo "APP ENV is for $APP_ENV"
+
       # Restaurar dependencias
       - name: Restore dependencies
         run: dotnet restore
